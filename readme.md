@@ -1,4 +1,3 @@
-cat << 'EOF' > README.md
 # Plataforma de Rehabilitación Cognitiva y Motora - Perrita Brisa 🐾
 
 Aplicación web interactiva de rehabilitación motora, cognitiva y de estimulación visomotora diseñada para personas en proceso de recuperación neuromuscular o con afecciones del campo visual izquierdo (como hemianopsia o inatención).
