@@ -1,0 +1,1060 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Rehabilitación Cognitiva y Motora - Brisa</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <style>
+    body {
+      touch-action: manipulation;
+      -webkit-tap-highlight-color: transparent;
+      overflow-x: hidden;
+    }
+    .touch-btn {
+      min-height: 52px;
+    }
+    @keyframes pulse-soft {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.03); }
+    }
+    .animate-pulse-soft {
+      animation: pulse-soft 2s infinite ease-in-out;
+    }
+
+    /* --- ANIMACIONES DEMOSTRATIVAS PARA EJERCICIOS --- */
+    /* 1. Puño */
+    @keyframes anim-fist {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(0.65) rotate(-5deg); }
+    }
+    .demo-fist { animation: anim-fist 2s infinite ease-in-out; transform-origin: center; }
+
+    /* 2. Pinza */
+    @keyframes anim-pinch {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(8px); }
+    }
+    .demo-pinch { animation: anim-pinch 1.5s infinite ease-in-out; }
+
+    /* 3. Desplazar Vaso */
+    @keyframes anim-slide-cup {
+      0%, 100% { transform: translateX(-20px); }
+      50% { transform: translateX(20px); }
+    }
+    .demo-cup { animation: anim-slide-cup 2.5s infinite ease-in-out; }
+
+    /* 4. Giro Muñeca */
+    @keyframes anim-wrist {
+      0%, 100% { transform: rotate(0deg); }
+      50% { transform: rotate(180deg); }
+    }
+    .demo-wrist { animation: anim-wrist 2s infinite ease-in-out; transform-origin: center; }
+
+    /* 5. Tobillo */
+    @keyframes anim-ankle {
+      0%, 100% { transform: rotate(0deg); }
+      50% { transform: rotate(-25deg); }
+    }
+    .demo-ankle { animation: anim-ankle 1.8s infinite ease-in-out; transform-origin: bottom right; }
+
+    /* 6. Extensión Rodilla */
+    @keyframes anim-knee-ext {
+      0%, 100% { transform: rotate(0deg); }
+      50% { transform: rotate(-50deg); }
+    }
+    .demo-knee-ext { animation: anim-knee-ext 2.2s infinite ease-in-out; transform-origin: top left; }
+
+    /* 7. Elevación Rodilla */
+    @keyframes anim-knee-lift {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-16px); }
+    }
+    .demo-knee-lift { animation: anim-knee-lift 1.8s infinite ease-in-out; }
+
+    /* 8. Carga Peso */
+    @keyframes anim-weight-shift {
+      0%, 100% { transform: rotate(0deg); }
+      50% { transform: rotate(-12deg) translateX(-6px); }
+    }
+    .demo-weight-shift { animation: anim-weight-shift 2.5s infinite ease-in-out; transform-origin: bottom center; }
+
+    /* 9. Ancla Visual */
+    @keyframes anim-anchor {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.3; transform: scale(1.2); }
+    }
+    .demo-anchor { animation: anim-anchor 1.2s infinite ease-in-out; }
+
+    /* 10. Giro Cuello */
+    @keyframes anim-head-turn {
+      0%, 100% { transform: rotate(0deg); }
+      50% { transform: rotate(-35deg); }
+    }
+    .demo-head-turn { animation: anim-head-turn 2.5s infinite ease-in-out; transform-origin: center; }
+  </style>
+</head>
+<body class="bg-amber-50/40 text-slate-800 font-sans min-h-screen flex flex-col select-none">
+
+  <!-- Encabezado unificado para Tablet -->
+  <header class="bg-teal-700 text-white px-4 py-2.5 shadow-md sticky top-0 z-50">
+    <div class="max-w-6xl mx-auto flex items-center justify-between gap-3">
+      <div class="flex items-center gap-3 cursor-pointer" onclick="navigate('menu')">
+        <!-- Avatar de Brisa (Perrita Blanca) -->
+        <div class="w-12 h-12 bg-teal-500 rounded-2xl flex items-center justify-center border-2 border-teal-200 shadow-inner shrink-0 relative">
+          <svg class="w-10 h-10 animate-pulse-soft" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- Orejas suaves -->
+            <path d="M 22 28 C 10 38 16 62 28 50 Z" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="2.5"/>
+            <path d="M 78 28 C 90 38 84 62 72 50 Z" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="2.5"/>
+            <path d="M 24 34 C 17 40 20 54 27 47 Z" fill="#FCE7F3"/>
+            <path d="M 76 34 C 83 40 80 54 73 47 Z" fill="#FCE7F3"/>
+            <!-- Cabeza -->
+            <circle cx="50" cy="50" r="30" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="2.5"/>
+            <!-- Ojos -->
+            <circle cx="38" cy="46" r="4" fill="#1E293B"/>
+            <circle cx="39.5" cy="44.5" r="1.5" fill="#FFFFFF"/>
+            <circle cx="62" cy="46" r="4" fill="#1E293B"/>
+            <circle cx="63.5" cy="44.5" r="1.5" fill="#FFFFFF"/>
+            <!-- Hocico y Nariz -->
+            <ellipse cx="50" cy="56" rx="9" ry="7" fill="#F1F5F9"/>
+            <ellipse cx="50" cy="53" rx="4" ry="3" fill="#334155"/>
+            <path d="M 50 56 L 50 59 Q 45 62 42 59 M 50 59 Q 55 62 58 59" stroke="#334155" stroke-width="2" stroke-linecap="round"/>
+            <!-- Moñito rosa de Brisa -->
+            <path d="M 50 20 C 43 14 37 22 46 23 C 37 24 43 32 50 26 C 57 32 63 24 54 23 C 63 22 57 14 50 20 Z" fill="#F472B6"/>
+            <circle cx="50" cy="23" r="2.5" fill="#F43F5E"/>
+          </svg>
+        </div>
+        <div>
+          <h1 class="text-lg sm:text-xl font-bold tracking-wide leading-tight">Plataforma de Rehabilitación</h1>
+          <p class="text-teal-100 text-xs">Perrita Brisa • Ejercicios con IA Asistente</p>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-2">
+        <button id="btn-home" onclick="navigate('menu')" class="touch-btn hidden bg-teal-800 hover:bg-teal-600 text-white font-bold px-3 py-1.5 rounded-xl flex items-center gap-2 text-sm transition-all border border-teal-500">
+          <i class="fa-solid fa-house"></i>
+          <span class="hidden sm:inline">Menú Principal</span>
+        </button>
+        <button id="btn-audio-global" onclick="speakCurrentContext()" class="touch-btn bg-amber-400 hover:bg-amber-500 text-slate-950 font-black px-3 py-1.5 rounded-xl flex items-center gap-2 text-xs sm:text-sm transition-all shadow-md border-2 border-amber-300 animate-pulse-soft">
+          <i class="fa-solid fa-volume-high text-xl text-slate-900"></i>
+          <span id="text-audio-global">🔊 Tocá acá para escuchar</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Contenedor Principal -->
+  <main class="max-w-6xl mx-auto w-full p-3 sm:p-4 flex-grow flex flex-col justify-center">
+
+    <!-- VISTA 1: MENU PRINCIPAL SINTÉTICO -->
+    <section id="view-menu" class="view-panel flex flex-col gap-3">
+      
+      <!-- Mensaje de Bienvenida e IA -->
+      <div class="bg-white rounded-2xl p-3.5 shadow-sm border border-stone-200 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+        <div class="flex items-center gap-3">
+          <div class="bg-teal-100 text-teal-800 p-2.5 rounded-xl shrink-0">
+            <i class="fa-solid fa-dog text-2xl"></i>
+          </div>
+          <div>
+            <h2 class="text-lg font-bold text-slate-800 leading-tight">¡Hola! Soy Brisa 🐾</h2>
+            <p id="menu-brisa-text" class="text-slate-600 text-xs sm:text-sm">
+              Elegí una rutina, conversá conmigo o jugá. ¡Estoy para acompañarte hoy!
+            </p>
+          </div>
+        </div>
+        <button onclick="generarConsejoDiarioIA()" id="btn-consejo-ia" class="touch-btn bg-emerald-600 hover:bg-emerald-700 active:scale-95 text-white font-bold px-3 py-2 rounded-xl text-xs sm:text-sm flex items-center gap-2 shadow transition-all shrink-0 w-full sm:w-auto justify-center">
+          <span>✨ Pedir consejo diario a Brisa</span>
+        </button>
+      </div>
+
+      <!-- Grilla Compacta de Opciones -->
+      <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
+
+        <!-- Opción 1: Ejercicios guiados -->
+        <div onclick="navigate('ejercicios')" class="bg-gradient-to-br from-teal-50 to-emerald-100/70 rounded-2xl p-3 border-2 border-teal-300 shadow-sm hover:shadow-md transition-all cursor-pointer flex flex-col justify-between">
+          <div class="flex items-center justify-between">
+            <div class="bg-teal-600 text-white w-9 h-9 rounded-xl flex items-center justify-center text-base shadow-sm">
+              <i class="fa-solid fa-person-walking"></i>
+            </div>
+            <span class="bg-teal-200 text-teal-900 text-[10px] font-bold px-2 py-0.5 rounded-full">Guías</span>
+          </div>
+          <div class="my-1.5">
+            <h3 class="text-base font-bold text-teal-950 leading-tight">Ejercicios Físicos</h3>
+            <p class="text-teal-800 text-xs mt-0.5">Mano, pierna y campo visual.</p>
+          </div>
+          <div class="flex items-center text-teal-700 font-bold text-xs">
+            <span>Ver Ejercicios</span>
+            <i class="fa-solid fa-chevron-right ml-1 text-[10px]"></i>
+          </div>
+        </div>
+
+        <!-- Opción 2: Chat Asistente con Brisa (IA) -->
+        <div onclick="navigate('chat-brisa')" class="bg-gradient-to-br from-sky-50 to-blue-100/80 rounded-2xl p-3 border-2 border-sky-300 shadow-sm hover:shadow-md transition-all cursor-pointer flex flex-col justify-between">
+          <div class="flex items-center justify-between">
+            <div class="bg-sky-600 text-white w-9 h-9 rounded-xl flex items-center justify-center text-base shadow-sm">
+              <i class="fa-solid fa-comments"></i>
+            </div>
+            <span class="bg-sky-200 text-sky-900 text-[10px] font-bold px-2 py-0.5 rounded-full">✨ IA</span>
+          </div>
+          <div class="my-1.5">
+            <h3 class="text-base font-bold text-sky-950 leading-tight">Hablar con Brisa</h3>
+            <p class="text-sky-800 text-xs mt-0.5">Hacé preguntas o pedí ánimos.</p>
+          </div>
+          <div class="flex items-center text-sky-700 font-bold text-xs">
+            <span>✨ Abrir Chat</span>
+            <i class="fa-solid fa-chevron-right ml-1 text-[10px]"></i>
+          </div>
+        </div>
+
+        <!-- Opción 3: Rutina Adaptada IA -->
+        <div onclick="navigate('rutina-ia')" class="bg-gradient-to-br from-purple-50 to-indigo-100/80 rounded-2xl p-3 border-2 border-purple-300 shadow-sm hover:shadow-md transition-all cursor-pointer flex flex-col justify-between">
+          <div class="flex items-center justify-between">
+            <div class="bg-purple-600 text-white w-9 h-9 rounded-xl flex items-center justify-center text-base shadow-sm">
+              <i class="fa-solid fa-wand-magic-sparkles"></i>
+            </div>
+            <span class="bg-purple-200 text-purple-900 text-[10px] font-bold px-2 py-0.5 rounded-full">✨ IA</span>
+          </div>
+          <div class="my-1.5">
+            <h3 class="text-base font-bold text-purple-950 leading-tight">Rutina Personalizada</h3>
+            <p class="text-purple-800 text-xs mt-0.5">Adaptada a cómo te sentís hoy.</p>
+          </div>
+          <div class="flex items-center text-purple-700 font-bold text-xs">
+            <span>✨ Crear Rutina</span>
+            <i class="fa-solid fa-chevron-right ml-1 text-[10px]"></i>
+          </div>
+        </div>
+
+        <!-- Opción 4: Cuento y Memoria IA -->
+        <div onclick="navigate('cuento-ia')" class="bg-gradient-to-br from-emerald-50 to-teal-100/80 rounded-2xl p-3 border-2 border-emerald-300 shadow-sm hover:shadow-md transition-all cursor-pointer flex flex-col justify-between">
+          <div class="flex items-center justify-between">
+            <div class="bg-emerald-600 text-white w-9 h-9 rounded-xl flex items-center justify-center text-base shadow-sm">
+              <i class="fa-solid fa-book-open-reader"></i>
+            </div>
+            <span class="bg-emerald-200 text-emerald-900 text-[10px] font-bold px-2 py-0.5 rounded-full">✨ IA</span>
+          </div>
+          <div class="my-1.5">
+            <h3 class="text-base font-bold text-emerald-950 leading-tight">Cuento e Historia</h3>
+            <p class="text-emerald-800 text-xs mt-0.5">Lectura y preguntas de memoria.</p>
+          </div>
+          <div class="flex items-center text-emerald-700 font-bold text-xs">
+            <span>✨ Leer Cuento</span>
+            <i class="fa-solid fa-chevron-right ml-1 text-[10px]"></i>
+          </div>
+        </div>
+
+        <!-- Opción 5: Juego de Memoria -->
+        <div onclick="startMemoryGame()" class="bg-gradient-to-br from-amber-50 to-orange-100/70 rounded-2xl p-3 border-2 border-amber-300 shadow-sm hover:shadow-md transition-all cursor-pointer flex flex-col justify-between">
+          <div class="flex items-center justify-between">
+            <div class="bg-amber-600 text-white w-9 h-9 rounded-xl flex items-center justify-center text-base shadow-sm">
+              <i class="fa-solid fa-brain"></i>
+            </div>
+            <span class="bg-amber-200 text-amber-900 text-[10px] font-bold px-2 py-0.5 rounded-full">Juego</span>
+          </div>
+          <div class="my-1.5">
+            <h3 class="text-base font-bold text-amber-950 leading-tight">Juego de Memoria</h3>
+            <p class="text-amber-800 text-xs mt-0.5">Encontrá las parejas de cartas.</p>
+          </div>
+          <div class="flex items-center text-amber-700 font-bold text-xs">
+            <span>Jugar Memoria</span>
+            <i class="fa-solid fa-chevron-right ml-1 text-[10px]"></i>
+          </div>
+        </div>
+
+        <!-- Opción 6: Rastreo Visual Izquierdo -->
+        <div onclick="navigate('juego-rastreo')" class="bg-gradient-to-br from-rose-50 to-pink-100/70 rounded-2xl p-3 border-2 border-rose-300 shadow-sm hover:shadow-md transition-all cursor-pointer flex flex-col justify-between">
+          <div class="flex items-center justify-between">
+            <div class="bg-rose-600 text-white w-9 h-9 rounded-xl flex items-center justify-center text-base shadow-sm">
+              <i class="fa-solid fa-crosshairs"></i>
+            </div>
+            <span class="bg-rose-200 text-rose-900 text-[10px] font-bold px-2 py-0.5 rounded-full">Visomotor</span>
+          </div>
+          <div class="my-1.5">
+            <h3 class="text-base font-bold text-rose-950 leading-tight">Rastreo Izquierdo</h3>
+            <p class="text-rose-800 text-xs mt-0.5">Atención al sector izquierdo.</p>
+          </div>
+          <div class="flex items-center text-rose-700 font-bold text-xs">
+            <span>Iniciar Rastreo</span>
+            <i class="fa-solid fa-chevron-right ml-1 text-[10px]"></i>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- VISTA 2: CHAT INTERACTIVO CON BRISA (GEMINI API) -->
+    <section id="view-chat-brisa" class="view-panel hidden flex-col gap-3">
+      <div class="bg-sky-100 border border-sky-300 rounded-2xl p-3 flex items-center justify-between">
+        <div class="flex items-center gap-2">
+          <i class="fa-solid fa-dog text-sky-700 text-2xl"></i>
+          <div>
+            <h3 class="text-lg font-bold text-sky-950">Conversá con Brisa 🐾</h3>
+            <p class="text-sky-800 text-xs">Preguntale a Brisa sobre tus ejercicios o pedile apoyo.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Preguntas rápidas -->
+      <div class="flex gap-2 overflow-x-auto pb-1">
+        <button onclick="enviarPreguntaRapida('¡Hola Brisa! ¿Cómo estás hoy?')" class="touch-btn bg-white hover:bg-sky-50 border border-sky-300 text-sky-900 text-xs font-bold px-3 py-1.5 rounded-xl whitespace-nowrap shadow-sm">
+          👋 ¡Hola Brisa!
+        </button>
+        <button onclick="enviarPreguntaRapida('Brindame un consejo de aliento si hoy me cuesta hacer los ejercicios')" class="touch-btn bg-white hover:bg-sky-50 border border-sky-300 text-sky-900 text-xs font-bold px-3 py-1.5 rounded-xl whitespace-nowrap shadow-sm">
+          💪 Necesito un consejo de aliento
+        </button>
+        <button onclick="enviarPreguntaRapida('¿Por qué es importante ejercitar la mano y pierna izquierda?')" class="touch-btn bg-white hover:bg-sky-50 border border-sky-300 text-sky-900 text-xs font-bold px-3 py-1.5 rounded-xl whitespace-nowrap shadow-sm">
+          🧠 ¿Por qué ejercitar el lado izquierdo?
+        </button>
+      </div>
+
+      <!-- Caja del Chat -->
+      <div id="chat-messages" class="bg-white rounded-2xl p-3 border border-stone-200 h-64 overflow-y-auto flex flex-col gap-2 shadow-inner">
+        <div class="bg-sky-50 border border-sky-200 rounded-2xl p-3 max-w-[85%] self-start">
+          <p class="text-xs font-bold text-sky-900 mb-0.5">Brisa 🐾</p>
+          <p class="text-xs sm:text-sm text-slate-700">¡Hola! Soy Brisa. Podés escribirme o tocar los botones de arriba para hablar conmigo. ¿Cómo te sentís hoy?</p>
+        </div>
+      </div>
+
+      <!-- Input de mensaje -->
+      <div class="flex gap-2">
+        <input type="text" id="chat-input" placeholder="Escribile un mensaje a Brisa..." class="flex-grow p-3 rounded-xl border border-stone-300 text-sm focus:outline-none focus:border-sky-500 bg-white shadow-sm" onkeypress="if(event.key==='Enter') enviarMensajeChat()">
+        <button onclick="enviarMensajeChat()" id="btn-send-chat" class="touch-btn bg-sky-600 hover:bg-sky-700 text-white font-bold px-5 py-2.5 rounded-xl text-sm flex items-center justify-center shadow-md">
+          <span>✨ Enviar</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- VISTA 3: RUTINA IA PERSONALIZADA (GEMINI API) -->
+    <section id="view-rutina-ia" class="view-panel hidden flex-col gap-3">
+      <div class="bg-purple-100 border border-purple-300 rounded-2xl p-3 flex items-center justify-between">
+        <div>
+          <h3 class="text-lg font-bold text-purple-950">Generador de Rutina Personalizada ✨</h3>
+          <p class="text-purple-800 text-xs">Brisa creará 3 micro-ejercicios ideales según tu estado actual.</p>
+        </div>
+      </div>
+
+      <!-- Formulario de Selección -->
+      <div class="bg-white rounded-2xl p-3.5 border border-stone-200 flex flex-col gap-3 shadow-sm">
+        <div>
+          <label class="block text-xs font-bold text-slate-700 mb-1">1. ¿Cómo te sentís hoy?</label>
+          <div class="grid grid-cols-2 gap-2">
+            <button onclick="selectEstado('Con buena energía')" class="estado-btn touch-btn bg-purple-50 hover:bg-purple-100 border border-purple-300 rounded-xl p-2 text-xs font-bold text-purple-900 text-center active-estado">😃 Con buena energía</button>
+            <button onclick="selectEstado('Algo cansado o con sueño')" class="estado-btn touch-btn bg-stone-50 hover:bg-stone-100 border border-stone-200 rounded-xl p-2 text-xs font-bold text-slate-700 text-center">😴 Algo cansado</button>
+            <button onclick="selectEstado('Con molestia suave en la mano')" class="estado-btn touch-btn bg-stone-50 hover:bg-stone-100 border border-stone-200 rounded-xl p-2 text-xs font-bold text-slate-700 text-center">✋ Molestia en la mano</button>
+            <button onclick="selectEstado('Con ganas de ejercitar la vista')" class="estado-btn touch-btn bg-stone-50 hover:bg-stone-100 border border-stone-200 rounded-xl p-2 text-xs font-bold text-slate-700 text-center">👀 Enfocar la vista</button>
+          </div>
+        </div>
+
+        <button onclick="generarRutinaIA()" id="btn-generar-rutina" class="touch-btn bg-purple-600 hover:bg-purple-700 active:scale-95 text-white font-bold px-4 py-3 rounded-xl text-sm flex items-center justify-center gap-2 shadow-md w-full">
+          <span>✨ Generar mi rutina ideal con Brisa</span>
+        </button>
+      </div>
+
+      <!-- Resultado de la Rutina IA -->
+      <div id="rutina-ia-result" class="hidden bg-white rounded-2xl p-4 border border-purple-200 shadow-sm flex flex-col gap-3">
+        <div class="flex items-center justify-between border-b border-purple-100 pb-2">
+          <span class="font-bold text-purple-900 text-sm">Tu Rutina Adaptada por Brisa 🐾</span>
+          <button onclick="speakText(document.getElementById('rutina-ia-text').innerText)" class="text-amber-600 font-bold text-xs bg-amber-100 px-2.5 py-1 rounded-lg">
+            🔊 Escuchar Rutina
+          </button>
+        </div>
+        <div id="rutina-ia-text" class="text-xs sm:text-sm text-slate-700 whitespace-pre-line leading-relaxed">
+          <!-- Generado dinámicamente por Gemini -->
+        </div>
+      </div>
+    </section>
+
+    <!-- VISTA 4: CUENTO E HISTORIA DE MEMORIA (GEMINI API) -->
+    <section id="view-cuento-ia" class="view-panel hidden flex-col gap-3">
+      <div class="bg-emerald-100 border border-emerald-300 rounded-2xl p-3 flex items-center justify-between">
+        <div>
+          <h3 class="text-lg font-bold text-emerald-950">Cuentos Cortos para la Memoria ✨</h3>
+          <p class="text-emerald-800 text-xs">Leé una historia breve creada por Brisa y respondé las preguntas.</p>
+        </div>
+        <button onclick="generarCuentoIA()" id="btn-generar-cuento" class="touch-btn bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-3 py-1.5 rounded-xl text-xs flex items-center gap-1 shadow">
+          <span>✨ Crear Cuento</span>
+        </button>
+      </div>
+
+      <!-- Contenedor del Cuento -->
+      <div id="cuento-container" class="bg-white rounded-2xl p-4 border border-stone-200 shadow-sm flex flex-col gap-3">
+        <p class="text-xs text-slate-500 italic">Presioná el botón arriba para que Brisa te cuente una nueva historia.</p>
+      </div>
+    </section>
+
+    <!-- VISTA 5: EJERCICIOS CON BRISA (DEMOSTRACIONES VISUALES ANIMADAS) -->
+    <section id="view-ejercicios" class="view-panel hidden flex-col gap-3">
+      
+      <!-- Pestañas de Ejercicios -->
+      <div class="grid grid-cols-3 gap-2 bg-stone-200/80 p-1.5 rounded-2xl">
+        <button onclick="switchTab('mano')" id="tab-mano" class="touch-btn tab-btn active-tab flex items-center justify-center gap-2 py-2 px-3 rounded-xl font-bold text-sm transition-all bg-white text-teal-800 shadow-sm">
+          <i class="fa-solid fa-hand text-lg"></i> Mano Izq.
+        </button>
+        <button onclick="switchTab('pierna')" id="tab-pierna" class="touch-btn tab-btn flex items-center justify-center gap-2 py-2 px-3 rounded-xl font-bold text-sm transition-all text-slate-700 hover:text-slate-900">
+          <i class="fa-solid fa-socks text-lg"></i> Pierna Izq.
+        </button>
+        <button onclick="switchTab('vista')" id="tab-vista" class="touch-btn tab-btn flex items-center justify-center gap-2 py-2 px-3 rounded-xl font-bold text-sm transition-all text-slate-700 hover:text-slate-900">
+          <i class="fa-solid fa-eye text-lg"></i> Campo Visual
+        </button>
+      </div>
+
+      <!-- Guía de Brisa -->
+      <div class="bg-teal-50 border border-teal-200 rounded-2xl p-2.5 flex items-center gap-3">
+        <i class="fa-solid fa-volume-high text-amber-600 text-2xl shrink-0 animate-bounce"></i>
+        <p id="brisa-speech" class="text-teal-900 text-xs sm:text-sm font-bold">
+          Tocá el botón amarillo grande de cada tarjeta para escuchar las instrucciones en voz alta.
+        </p>
+      </div>
+
+      <!-- Pestaña Mano Izquierda -->
+      <div id="sec-mano" class="tab-content flex flex-col gap-3">
+        <div class="grid md:grid-cols-2 gap-3">
+
+          <!-- Ejercicio 1: Puño Animado -->
+          <div class="bg-white rounded-2xl p-3 shadow-sm border border-stone-200 flex flex-col gap-2">
+            <div class="flex items-center gap-3">
+              <div class="w-24 h-24 bg-teal-50 border border-teal-200 rounded-xl flex items-center justify-center shrink-0 relative overflow-hidden">
+                <svg class="w-14 h-14 text-teal-700 demo-fist" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M18 11V6a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v0"/>
+                  <path d="M14 10V4a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v6"/>
+                  <path d="M10 10.5V6a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v8"/>
+                  <path d="M18 8a2 2 0 0 1 2 2v4a6 6 0 0 1-6 6h-2a6 6 0 0 1-6-6v-3a2 2 0 0 1 2-2h1"/>
+                </svg>
+              </div>
+              <div class="flex-grow">
+                <span class="bg-teal-100 text-teal-900 font-bold px-2 py-0.5 rounded-full text-xs inline-block mb-1">Ejercicio 1</span>
+                <h4 class="font-bold text-slate-800 text-base">Abrir y Cerrar Puño</h4>
+                <p class="text-slate-600 text-xs mt-0.5">Extiende los dedos del todo y ciérralos despacio en forma de puño.</p>
+              </div>
+            </div>
+
+            <button onclick="speakText('Apertura y cierre de puño izquierdo. Abre completamente la mano y luego ciérrala despacio formando un puño.')" class="touch-btn bg-amber-400 hover:bg-amber-500 active:scale-95 text-slate-950 font-black px-3 py-2 rounded-xl flex items-center justify-center gap-2.5 text-xs sm:text-sm shadow-md transition-all border-2 border-amber-500 w-full animate-pulse-soft">
+              <i class="fa-solid fa-volume-high text-xl sm:text-2xl text-slate-900"></i>
+              <span>¡TOCÁ ACÁ PARA ESCUCHAR EL EJERCICIO!</span>
+            </button>
+          </div>
+
+          <!-- Ejercicio 2: Pinza Animada -->
+          <div class="bg-white rounded-2xl p-3 shadow-sm border border-stone-200 flex flex-col gap-2">
+            <div class="flex items-center gap-3">
+              <div class="w-24 h-24 bg-teal-50 border border-teal-200 rounded-xl flex items-center justify-center shrink-0 relative overflow-hidden">
+                <div class="demo-pinch flex flex-col items-center">
+                  <i class="fa-solid fa-hand-holding text-3xl text-teal-700"></i>
+                  <i class="fa-solid fa-arrows-up-down text-xs text-amber-500 mt-1"></i>
+                </div>
+              </div>
+              <div class="flex-grow">
+                <span class="bg-teal-100 text-teal-900 font-bold px-2 py-0.5 rounded-full text-xs inline-block mb-1">Ejercicio 2</span>
+                <h4 class="font-bold text-slate-800 text-base">Toque de Dedos (Pinza)</h4>
+                <p class="text-slate-600 text-xs mt-0.5">Junta la yema del pulgar con cada uno de los dedos, uno por uno.</p>
+              </div>
+            </div>
+
+            <button onclick="speakText('Toque de dedos o pinza fina. Toca la yema del pulgar izquierdo con cada uno de los otros dedos.')" class="touch-btn bg-amber-400 hover:bg-amber-500 active:scale-95 text-slate-950 font-black px-3 py-2 rounded-xl flex items-center justify-center gap-2.5 text-xs sm:text-sm shadow-md transition-all border-2 border-amber-500 w-full animate-pulse-soft">
+              <i class="fa-solid fa-volume-high text-xl sm:text-2xl text-slate-900"></i>
+              <span>¡TOCÁ ACÁ PARA ESCUCHAR EL EJERCICIO!</span>
+            </button>
+          </div>
+
+          <!-- Ejercicio 3: Vaso Animado -->
+          <div class="bg-white rounded-2xl p-3 shadow-sm border border-stone-200 flex flex-col gap-2">
+            <div class="flex items-center gap-3">
+              <div class="w-24 h-24 bg-teal-50 border border-teal-200 rounded-xl flex items-center justify-center shrink-0 relative overflow-hidden">
+                <div class="demo-cup flex items-center gap-1 text-teal-700">
+                  <i class="fa-solid fa-whiskey-glass text-2xl"></i>
+                  <i class="fa-solid fa-arrow-right text-amber-500 text-sm"></i>
+                </div>
+              </div>
+              <div class="flex-grow">
+                <span class="bg-teal-100 text-teal-900 font-bold px-2 py-0.5 rounded-full text-xs inline-block mb-1">Ejercicio 3</span>
+                <h4 class="font-bold text-slate-800 text-base">Desplazar Vaso</h4>
+                <p class="text-slate-600 text-xs mt-0.5">Mueve un vaso plástico desde la izquierda de la mesa hacia el centro.</p>
+              </div>
+            </div>
+
+            <button onclick="speakText('Desplazamiento de vaso en la mesa. Desliza un vaso plástico ubicado a la izquierda hacia el centro.')" class="touch-btn bg-amber-400 hover:bg-amber-500 active:scale-95 text-slate-950 font-black px-3 py-2 rounded-xl flex items-center justify-center gap-2.5 text-xs sm:text-sm shadow-md transition-all border-2 border-amber-500 w-full animate-pulse-soft">
+              <i class="fa-solid fa-volume-high text-xl sm:text-2xl text-slate-900"></i>
+              <span>¡TOCÁ ACÁ PARA ESCUCHAR EL EJERCICIO!</span>
+            </button>
+          </div>
+
+          <!-- Ejercicio 4: Giro Muñeca Animado -->
+          <div class="bg-white rounded-2xl p-3 shadow-sm border border-stone-200 flex flex-col gap-2">
+            <div class="flex items-center gap-3">
+              <div class="w-24 h-24 bg-teal-50 border border-teal-200 rounded-xl flex items-center justify-center shrink-0 relative overflow-hidden">
+                <i class="fa-solid fa-hand text-3xl text-teal-700 demo-wrist"></i>
+              </div>
+              <div class="flex-grow">
+                <span class="bg-teal-100 text-teal-900 font-bold px-2 py-0.5 rounded-full text-xs inline-block mb-1">Ejercicio 4</span>
+                <h4 class="font-bold text-slate-800 text-base">Giro de Muñeca</h4>
+                <p class="text-slate-600 text-xs mt-0.5">Gira la mano para alternar la palma mirando hacia arriba y hacia abajo.</p>
+              </div>
+            </div>
+
+            <button onclick="speakText('Giro de muñeca. Rota la mano apoyada para girar la palma hacia arriba y luego hacia abajo.')" class="touch-btn bg-amber-400 hover:bg-amber-500 active:scale-95 text-slate-950 font-black px-3 py-2 rounded-xl flex items-center justify-center gap-2.5 text-xs sm:text-sm shadow-md transition-all border-2 border-amber-500 w-full animate-pulse-soft">
+              <i class="fa-solid fa-volume-high text-xl sm:text-2xl text-slate-900"></i>
+              <span>¡TOCÁ ACÁ PARA ESCUCHAR EL EJERCICIO!</span>
+            </button>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Pestaña Pierna Izquierda -->
+      <div id="sec-pierna" class="tab-content hidden flex-col gap-3">
+        <div class="grid md:grid-cols-2 gap-3">
+
+          <!-- Ejercicio Pierna 1: Tobillo Animado -->
+          <div class="bg-white rounded-2xl p-3 shadow-sm border border-stone-200 flex flex-col gap-2">
+            <div class="flex items-center gap-3">
+              <div class="w-24 h-24 bg-emerald-50 border border-emerald-200 rounded-xl flex items-center justify-center shrink-0 relative overflow-hidden">
+                <i class="fa-solid fa-shoe-prints text-3xl text-emerald-700 demo-ankle"></i>
+              </div>
+              <div class="flex-grow">
+                <span class="bg-emerald-100 text-emerald-900 font-bold px-2 py-0.5 rounded-full text-xs inline-block mb-1">Ejercicio 1</span>
+                <h4 class="font-bold text-slate-800 text-base">Talón y Punta</h4>
+                <p class="text-slate-600 text-xs mt-0.5">Sentado, levanta el talón izquierdo y luego la punta alternadamente.</p>
+              </div>
+            </div>
+
+            <button onclick="speakText('Movilidad del tobillo izquierdo. Sentado, eleva el talón apoyando la punta y luego eleva la punta.')" class="touch-btn bg-amber-400 hover:bg-amber-500 active:scale-95 text-slate-950 font-black px-3 py-2 rounded-xl flex items-center justify-center gap-2.5 text-xs sm:text-sm shadow-md transition-all border-2 border-amber-500 w-full animate-pulse-soft">
+              <i class="fa-solid fa-volume-high text-xl sm:text-2xl text-slate-900"></i>
+              <span>¡TOCÁ ACÁ PARA ESCUCHAR EL EJERCICIO!</span>
+            </button>
+          </div>
+
+          <!-- Ejercicio Pierna 2: Extensión Rodilla Animada -->
+          <div class="bg-white rounded-2xl p-3 shadow-sm border border-stone-200 flex flex-col gap-2">
+            <div class="flex items-center gap-3">
+              <div class="w-24 h-24 bg-emerald-50 border border-emerald-200 rounded-xl flex items-center justify-center shrink-0 relative overflow-hidden">
+                <div class="flex items-center text-emerald-700">
+                  <i class="fa-solid fa-chair text-xl text-slate-400"></i>
+                  <i class="fa-solid fa-[#000] fa-minus text-2xl demo-knee-ext ml-1"></i>
+                </div>
+              </div>
+              <div class="flex-grow">
+                <span class="bg-emerald-100 text-emerald-900 font-bold px-2 py-0.5 rounded-full text-xs inline-block mb-1">Ejercicio 2</span>
+                <h4 class="font-bold text-slate-800 text-base">Estirar Rodilla</h4>
+                <p class="text-slate-600 text-xs mt-0.5">Estira la pierna izquierda hacia el frente de forma recta y vuelve despacio.</p>
+              </div>
+            </div>
+
+            <button onclick="speakText('Extensión de rodilla. Estira la pierna izquierda hacia adelante levantando el pie de forma recta.')" class="touch-btn bg-amber-400 hover:bg-amber-500 active:scale-95 text-slate-950 font-black px-3 py-2 rounded-xl flex items-center justify-center gap-2.5 text-xs sm:text-sm shadow-md transition-all border-2 border-amber-500 w-full animate-pulse-soft">
+              <i class="fa-solid fa-volume-high text-xl sm:text-2xl text-slate-900"></i>
+              <span>¡TOCÁ ACÁ PARA ESCUCHAR EL EJERCICIO!</span>
+            </button>
+          </div>
+
+          <!-- Ejercicio Pierna 3: Elevación Rodilla Animada -->
+          <div class="bg-white rounded-2xl p-3 shadow-sm border border-stone-200 flex flex-col gap-2">
+            <div class="flex items-center gap-3">
+              <div class="w-24 h-24 bg-emerald-50 border border-emerald-200 rounded-xl flex items-center justify-center shrink-0 relative overflow-hidden">
+                <div class="demo-knee-lift flex flex-col items-center text-emerald-700">
+                  <i class="fa-solid fa-arrow-up text-xs text-amber-500 mb-1"></i>
+                  <i class="fa-solid fa-socks text-2xl"></i>
+                </div>
+              </div>
+              <div class="flex-grow">
+                <span class="bg-emerald-100 text-emerald-900 font-bold px-2 py-0.5 rounded-full text-xs inline-block mb-1">Ejercicio 3</span>
+                <h4 class="font-bold text-slate-800 text-base">Levantar Rodilla</h4>
+                <p class="text-slate-600 text-xs mt-0.5">Sube la rodilla izquierda despegando el pie del piso como dando un paso.</p>
+              </div>
+            </div>
+
+            <button onclick="speakText('Elevación de rodilla. Despega la rodilla izquierda separando el pie unos centímetros del suelo.')" class="touch-btn bg-amber-400 hover:bg-amber-500 active:scale-95 text-slate-950 font-black px-3 py-2 rounded-xl flex items-center justify-center gap-2.5 text-xs sm:text-sm shadow-md transition-all border-2 border-amber-500 w-full animate-pulse-soft">
+              <i class="fa-solid fa-volume-high text-xl sm:text-2xl text-slate-900"></i>
+              <span>¡TOCÁ ACÁ PARA ESCUCHAR EL EJERCICIO!</span>
+            </button>
+          </div>
+
+          <!-- Ejercicio Pierna 4: Carga Peso Animada -->
+          <div class="bg-white rounded-2xl p-3 shadow-sm border border-stone-200 flex flex-col gap-2">
+            <div class="flex items-center gap-3">
+              <div class="w-24 h-24 bg-emerald-50 border border-emerald-200 rounded-xl flex items-center justify-center shrink-0 relative overflow-hidden">
+                <div class="demo-weight-shift text-center text-emerald-700">
+                  <i class="fa-solid fa-child text-3xl"></i>
+                </div>
+              </div>
+              <div class="flex-grow">
+                <span class="bg-emerald-100 text-emerald-900 font-bold px-2 py-0.5 rounded-full text-xs inline-block mb-1">Ejercicio 4</span>
+                <h4 class="font-bold text-slate-800 text-base">Cargar Peso Sentado</h4>
+                <p class="text-slate-600 text-xs mt-0.5">Inclina el cuerpo suavemente hacia la izquierda para sentir el apoyo firmemente.</p>
+              </div>
+            </div>
+
+            <button onclick="speakText('Carga de peso. Inclina levemente el torso hacia la izquierda apoyando peso sobre ese lado.')" class="touch-btn bg-amber-400 hover:bg-amber-500 active:scale-95 text-slate-950 font-black px-3 py-2 rounded-xl flex items-center justify-center gap-2.5 text-xs sm:text-sm shadow-md transition-all border-2 border-amber-500 w-full animate-pulse-soft">
+              <i class="fa-solid fa-volume-high text-xl sm:text-2xl text-slate-900"></i>
+              <span>¡TOCÁ ACÁ PARA ESCUCHAR EL EJERCICIO!</span>
+            </button>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Pestaña Campo Visual Izquierdo -->
+      <div id="sec-vista" class="tab-content hidden flex-col gap-3">
+        <div class="grid md:grid-cols-2 gap-3">
+
+          <!-- Ejercicio Vista 1: Ancla Animada -->
+          <div class="bg-white rounded-2xl p-3 shadow-sm border border-stone-200 flex flex-col gap-2">
+            <div class="flex items-center gap-3">
+              <div class="w-24 h-24 bg-amber-50 border border-amber-200 rounded-xl flex items-center justify-center shrink-0 relative overflow-hidden">
+                <div class="w-14 h-10 bg-slate-200 rounded border border-slate-300 relative flex items-center">
+                  <div class="w-2.5 h-full bg-rose-500 rounded-l demo-anchor"></div>
+                </div>
+              </div>
+              <div class="flex-grow">
+                <span class="bg-amber-100 text-amber-900 font-bold px-2 py-0.5 rounded-full text-xs inline-block mb-1">Estrategia 1</span>
+                <h4 class="font-bold text-slate-800 text-base">Ancla Roja a la Izquierda</h4>
+                <p class="text-slate-600 text-xs mt-0.5">Busca primero la marca brillante roja colocada en el margen izquierdo.</p>
+              </div>
+            </div>
+
+            <button onclick="speakText('Ancla roja a la izquierda. Mira siempre primero la señal roja ubicada en el lado izquierdo.')" class="touch-btn bg-amber-400 hover:bg-amber-500 active:scale-95 text-slate-950 font-black px-3 py-2 rounded-xl flex items-center justify-center gap-2.5 text-xs sm:text-sm shadow-md transition-all border-2 border-amber-500 w-full animate-pulse-soft">
+              <i class="fa-solid fa-volume-high text-xl sm:text-2xl text-slate-900"></i>
+              <span>¡TOCÁ ACÁ PARA ESCUCHAR EL EJERCICIO!</span>
+            </button>
+          </div>
+
+          <!-- Ejercicio Vista 2: Giro Cuello Animado -->
+          <div class="bg-white rounded-2xl p-3 shadow-sm border border-stone-200 flex flex-col gap-2">
+            <div class="flex items-center gap-3">
+              <div class="w-24 h-24 bg-amber-50 border border-amber-200 rounded-xl flex items-center justify-center shrink-0 relative overflow-hidden">
+                <i class="fa-solid fa-face-smile text-3xl text-amber-700 demo-head-turn"></i>
+              </div>
+              <div class="flex-grow">
+                <span class="bg-amber-100 text-amber-900 font-bold px-2 py-0.5 rounded-full text-xs inline-block mb-1">Estrategia 2</span>
+                <h4 class="font-bold text-slate-800 text-base">Girar Cabeza a la Izquierda</h4>
+                <p class="text-slate-600 text-xs mt-0.5">Gira el cuello de forma consciente para enfocar tu hombro izquierdo.</p>
+              </div>
+            </div>
+
+            <button onclick="speakText('Giro activo de cuello. Gira la cabeza hacia la izquierda mirando por encima del hombro.')" class="touch-btn bg-amber-400 hover:bg-amber-500 active:scale-95 text-slate-950 font-black px-3 py-2 rounded-xl flex items-center justify-center gap-2.5 text-xs sm:text-sm shadow-md transition-all border-2 border-amber-500 w-full animate-pulse-soft">
+              <i class="fa-solid fa-volume-high text-xl sm:text-2xl text-slate-900"></i>
+              <span>¡TOCÁ ACÁ PARA ESCUCHAR EL EJERCICIO!</span>
+            </button>
+          </div>
+
+        </div>
+      </div>
+
+    </section>
+
+    <!-- VISTA 6: JUEGO DE MEMORIA -->
+    <section id="view-juego-memoria" class="view-panel hidden flex-col gap-3">
+      <div class="bg-amber-100/70 border border-amber-300 rounded-2xl p-3 flex items-center justify-between">
+        <div>
+          <h3 class="text-lg font-bold text-amber-950">Juego de Memoria</h3>
+          <p class="text-amber-800 text-xs">Encuentra los pares de figuras correspondientes.</p>
+        </div>
+        <button onclick="initMemoryCards()" class="touch-btn bg-amber-600 text-white font-bold px-3 py-1.5 rounded-xl text-sm">Reiniciar</button>
+      </div>
+
+      <div id="memory-board" class="grid grid-cols-3 sm:grid-cols-4 gap-3 max-w-2xl mx-auto w-full">
+        <!-- Tarjetas dinámicas -->
+      </div>
+    </section>
+
+    <!-- VISTA 7: RASTREO VISUAL IZQUIERDO -->
+    <section id="view-juego-rastreo" class="view-panel hidden flex-col gap-3">
+      <div class="bg-rose-100/70 border border-rose-300 rounded-2xl p-3 flex items-center justify-between">
+        <div>
+          <h3 class="text-lg font-bold text-rose-950">Rastreo Visual Izquierdo</h3>
+          <p class="text-rose-800 text-xs">Prestá atención al lado izquierdo y tocá la estrella.</p>
+        </div>
+        <button onclick="iniciarRastreo()" class="touch-btn bg-rose-600 text-white font-bold px-3 py-1.5 rounded-xl text-sm">Iniciar</button>
+      </div>
+
+      <div id="game-board-rastreo" class="relative bg-slate-900 rounded-2xl h-72 w-full overflow-hidden border-4 border-slate-800 flex items-center justify-center">
+        <div class="absolute inset-y-0 left-1/2 w-0.5 border-r border-dashed border-slate-700"></div>
+        <div class="absolute top-2 left-3 bg-emerald-500/30 border border-emerald-400 text-emerald-200 text-[10px] font-bold px-2.5 py-0.5 rounded-full">
+          LADO IZQUIERDO
+        </div>
+
+        <div id="rastreo-overlay" class="text-center p-4 bg-slate-900/90 w-full h-full flex flex-col items-center justify-center">
+          <h4 class="text-white font-bold text-lg mb-1">Práctica Visomotor</h4>
+          <p class="text-slate-300 text-xs max-w-md mb-3">Toca la estrella verde que aparecerá mayoritariamente en la izquierda.</p>
+          <button onclick="iniciarRastreo()" class="touch-btn bg-emerald-500 text-white font-bold px-5 py-2 rounded-xl text-base">Comenzar</button>
+        </div>
+
+        <div id="target-rastreo" class="hidden absolute cursor-pointer p-3 transition-all duration-150 transform -translate-x-1/2 -translate-y-1/2" onclick="hitRastreo()">
+          <div class="bg-emerald-500 text-white w-12 h-12 rounded-full flex items-center justify-center shadow-lg animate-bounce">
+            <i class="fa-solid fa-star text-xl"></i>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-2 gap-3 bg-white p-3 rounded-xl border border-stone-200 text-center font-bold text-sm">
+        <div>Aciertos: <span id="rastreo-score" class="text-emerald-600 text-lg">0</span></div>
+        <div>Tiempo: <span id="rastreo-timer" class="text-slate-800 text-lg">30s</span></div>
+      </div>
+    </section>
+
+  </main>
+
+  <script>
+    const synth = window.speechSynthesis;
+    let currentView = 'menu';
+    let estadoSeleccionado = "Con buena energía";
+
+    // Llamada a la API de Gemini con reintentos y retroceso exponencial
+    async function callGeminiAPI(promptText, systemPrompt = "") {
+      const apiKey = "";
+      const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
+      
+      const payload = {
+        contents: [{ parts: [{ text: promptText }] }]
+      };
+      if (systemPrompt) {
+        payload.systemInstruction = { parts: [{ text: systemPrompt }] };
+      }
+
+      const delays = [1000, 2000, 4000, 8000, 16000];
+      for (let attempt = 0; attempt < 5; attempt++) {
+        try {
+          const response = await fetch(url, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(payload)
+          });
+          if (!response.ok) {
+            throw new Error(`Error HTTP status: ${response.status}`);
+          }
+          const data = await response.json();
+          const reply = data.candidates?.[0]?.content?.parts?.[0]?.text;
+          if (reply) return reply;
+          throw new Error("Respuesta sin texto");
+        } catch (err) {
+          if (attempt === 4) {
+            throw err;
+          }
+          await new Promise(r => setTimeout(r, delays[attempt]));
+        }
+      }
+    }
+
+    const BRISA_SYSTEM_PROMPT = "Eres Brisa, una perrita blanca muy cariñosa, dulce, optimista y amigable. Acompañas a personas en rehabilitación motora (post-ACV o movilidad reducida) guiando ejercicios suaves para mano izquierda, pierna izquierda y campo visual izquierdo. Siempre respondes con empatía, en oraciones cortas, muy claras, con amor y paciencia. Usa emoticones alegres como 🐾, 🐾, 💛, ✨.";
+
+    function navigate(viewId) {
+      currentView = viewId;
+      document.querySelectorAll('.view-panel').forEach(el => el.classList.add('hidden'));
+      document.getElementById(`view-${viewId}`).classList.remove('hidden');
+
+      const btnHome = document.getElementById('btn-home');
+      if (viewId === 'menu') {
+        btnHome.classList.add('hidden');
+      } else {
+        btnHome.classList.remove('hidden');
+      }
+
+      if (viewId === 'ejercicios') {
+        switchTab('mano');
+      }
+    }
+
+    function switchTab(tab) {
+      document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.classList.remove('active-tab', 'bg-white', 'text-teal-800', 'shadow-sm');
+        btn.classList.add('text-slate-700');
+      });
+      document.querySelectorAll('.tab-content').forEach(c => c.classList.add('hidden'));
+
+      const activeBtn = document.getElementById(`tab-${tab}`);
+      activeBtn.classList.add('active-tab', 'bg-white', 'text-teal-800', 'shadow-sm');
+      activeBtn.classList.remove('text-slate-700');
+
+      document.getElementById(`sec-${tab}`).classList.remove('hidden');
+    }
+
+    function speakText(text) {
+      if (!synth) return;
+      synth.cancel();
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.lang = 'es-AR';
+      utterance.rate = 0.9;
+      synth.speak(utterance);
+    }
+
+    function speakCurrentContext() {
+      if (currentView === 'menu') {
+        speakText('Hola, soy Brisa. Menú principal: podés ver ejercicios guiados, hablar conmigo en el chat, pedir una rutina personalizada o jugar.');
+      } else if (currentView === 'ejercicios') {
+        speakText('Sección de ejercicios demostrativos. Mira las imágenes o toca el botón amarillo grande de cada tarjeta para escucharlo.');
+      } else if (currentView === 'chat-brisa') {
+        speakText('Chat con Brisa. Escribime una pregunta o toca uno de los botones para conversar.');
+      } else if (currentView === 'rutina-ia') {
+        speakText('Generador de rutina personalizada. Elegí cómo te sientes hoy y presiona el botón para crear tu rutina.');
+      } else if (currentView === 'cuento-ia') {
+        speakText('Cuento corto de memoria. Presiona el botón para generar una historia y responder las preguntas.');
+      } else if (currentView === 'juego-memoria') {
+        speakText('Juego de memoria. Toca las cartas para encontrar los pares iguales.');
+      } else if (currentView === 'juego-rastreo') {
+        speakText('Rastreo visual izquierdo. Toca la estrella verde que aparece a la izquierda.');
+      }
+    }
+
+    // --- FUNCIONES GEMINI API ---
+
+    // 1. Consejo diario rápido
+    async function generarConsejoDiarioIA() {
+      const btn = document.getElementById('btn-consejo-ia');
+      const textElem = document.getElementById('menu-brisa-text');
+      const prevBtnText = btn.innerHTML;
+
+      btn.innerHTML = `<span>⏳ Brisa pensando...</span>`;
+      btn.disabled = true;
+
+      try {
+        const respuesta = await callGeminiAPI(
+          "Dame un consejo diario de motivación de 2 oraciones muy breves y cariñosas para alguien que hoy practica sus ejercicios de rehabilitación del lado izquierdo.",
+          BRISA_SYSTEM_PROMPT
+        );
+        textElem.innerText = respuesta;
+        speakText(respuesta);
+      } catch (e) {
+        textElem.innerText = "¡Vamos a tu ritmo! Hoy es un gran día para mover un poco la mano y la pierna izquierda con alegría. 🐾";
+      } finally {
+        btn.innerHTML = prevBtnText;
+        btn.disabled = false;
+      }
+    }
+
+    // 2. Chat Asistente con Brisa
+    async function enviarPreguntaRapida(pregunta) {
+      document.getElementById('chat-input').value = pregunta;
+      enviarMensajeChat();
+    }
+
+    async function enviarMensajeChat() {
+      const input = document.getElementById('chat-input');
+      const mensaje = input.value.trim();
+      if (!mensaje) return;
+
+      const container = document.getElementById('chat-messages');
+
+      // Agregar mensaje usuario
+      const userDiv = document.createElement('div');
+      userDiv.className = 'bg-teal-600 text-white rounded-2xl p-2.5 max-w-[85%] self-end text-xs sm:text-sm shadow-sm';
+      userDiv.innerText = mensaje;
+      container.appendChild(userDiv);
+
+      input.value = '';
+      container.scrollTop = container.scrollHeight;
+
+      // Indicador cargando
+      const loadingDiv = document.createElement('div');
+      loadingDiv.className = 'bg-sky-50 border border-sky-200 rounded-2xl p-2.5 max-w-[85%] self-start text-xs text-sky-800 italic';
+      loadingDiv.id = 'loading-chat';
+      loadingDiv.innerText = 'Brisa está escribiendo... 🐾';
+      container.appendChild(loadingDiv);
+      container.scrollTop = container.scrollHeight;
+
+      try {
+        const respuesta = await callGeminiAPI(mensaje, BRISA_SYSTEM_PROMPT);
+        document.getElementById('loading-chat').remove();
+
+        const brisaDiv = document.createElement('div');
+        brisaDiv.className = 'bg-sky-50 border border-sky-200 rounded-2xl p-3 max-w-[90%] self-start flex flex-col gap-1 shadow-sm';
+        brisaDiv.innerHTML = `
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-bold text-sky-900">Brisa 🐾</span>
+            <button onclick="speakText(this.parentElement.nextElementSibling.innerText)" class="text-amber-600 font-bold text-[10px] bg-amber-100 px-2 py-0.5 rounded">
+              🔊 Escuchar
+            </button>
+          </div>
+          <p class="text-xs sm:text-sm text-slate-700">${respuesta}</p>
+        `;
+        container.appendChild(brisaDiv);
+        speakText(respuesta);
+      } catch (err) {
+        document.getElementById('loading-chat').remove();
+        const errDiv = document.createElement('div');
+        errDiv.className = 'bg-rose-50 border border-rose-200 rounded-2xl p-2.5 max-w-[85%] self-start text-xs text-rose-800';
+        errDiv.innerText = "¡Woof! Tuve un pequeño problema de conexión. Intentemos de nuevo en un ratito. 🐾";
+        container.appendChild(errDiv);
+      }
+      container.scrollTop = container.scrollHeight;
+    }
+
+    // 3. Generador de Rutina IA
+    function selectEstado(estado) {
+      estadoSeleccionado = estado;
+      document.querySelectorAll('.estado-btn').forEach(btn => {
+        btn.classList.remove('active-estado', 'bg-purple-50', 'border-purple-300', 'text-purple-900');
+        btn.classList.add('bg-stone-50', 'border-stone-200', 'text-slate-700');
+      });
+      event.currentTarget.classList.add('active-estado', 'bg-purple-50', 'border-purple-300', 'text-purple-900');
+      event.currentTarget.classList.remove('bg-stone-50', 'border-stone-200', 'text-slate-700');
+    }
+
+    async function generarRutinaIA() {
+      const btn = document.getElementById('btn-generar-rutina');
+      const resContainer = document.getElementById('rutina-ia-result');
+      const textDiv = document.getElementById('rutina-ia-text');
+
+      btn.disabled = true;
+      btn.innerHTML = `<span>⏳ Brisa diseñando rutina...</span>`;
+
+      const prompt = `Crea una rutina de 3 pasos muy sencillos y seguros adaptados para alguien que hoy se siente: "${estadoSeleccionado}". La rutina debe enfocarse suavemente en el lado izquierdo (mano, pierna o visión). Presenta cada paso numerado de forma clara y cariñosa.`;
+
+      try {
+        const rutina = await callGeminiAPI(prompt, BRISA_SYSTEM_PROMPT);
+        textDiv.innerText = rutina;
+        resContainer.classList.remove('hidden');
+        speakText("Aquí está tu rutina personalizada: " + rutina);
+      } catch (e) {
+        textDiv.innerText = "1. Apoya tu mano izquierda en la mesa y respira suavemente.\n2. Abre y cierra los dedos a tu propio ritmo 5 veces.\n3. Gira suavemente tu cabeza a la izquierda con una sonrisa. 🐾";
+        resContainer.classList.remove('hidden');
+      } finally {
+        btn.disabled = false;
+        btn.innerHTML = `<span>✨ Generar mi rutina ideal con Brisa</span>`;
+      }
+    }
+
+    // 4. Generador Cuento IA
+    async function generarCuentoIA() {
+      const btn = document.getElementById('btn-generar-cuento');
+      const container = document.getElementById('cuento-container');
+
+      btn.disabled = true;
+      btn.innerHTML = `<span>⏳ Creando cuento...</span>`;
+
+      const prompt = `Genera un micro-cuento alegre de máximo 3 oraciones sobre las aventuras de la perrita blanca Brisa. Luego añade 2 preguntas muy sencillas con opción múltiple (A y B) para poner a prueba la memoria. Formatea el texto de forma clara con párrafos breves.`;
+
+      try {
+        const cuentoText = await callGeminiAPI(prompt, BRISA_SYSTEM_PROMPT);
+        container.innerHTML = `
+          <div class="flex justify-between items-center border-b border-emerald-100 pb-2">
+            <span class="font-bold text-emerald-900 text-sm">Historia de Brisa 🐾</span>
+            <button onclick="speakText(document.getElementById('cuento-text-content').innerText)" class="text-amber-600 font-bold text-xs bg-amber-100 px-2.5 py-1 rounded-lg">
+              🔊 Escuchar Cuento
+            </button>
+          </div>
+          <div id="cuento-text-content" class="text-xs sm:text-sm text-slate-700 whitespace-pre-line leading-relaxed">
+            ${cuentoText}
+          </div>
+        `;
+        speakText(cuentoText);
+      } catch (e) {
+        container.innerHTML = `<p class="text-xs text-slate-600">Brisa fue al parque esta mañana y encontró una pelota roja brillante. Jugó bajo el sol hasta cansarse y volvió feliz a casa. 🐾\n\n1. ¿De qué color era la pelota?\nA) Roja  B) Azul</p>`;
+      } finally {
+        btn.disabled = false;
+        btn.innerHTML = `<span>✨ Crear Cuento</span>`;
+      }
+    }
+
+    /* --- LÓGICA JUEGO MEMORIA --- */
+    const memoryIcons = ['fa-apple-whole', 'fa-car', 'fa-house', 'fa-sun', 'fa-bell', 'fa-heart'];
+    let memoryFlipped = [];
+    let memoryMatched = 0;
+
+    function startMemoryGame() {
+      navigate('juego-memoria');
+      initMemoryCards();
+    }
+
+    function initMemoryCards() {
+      const board = document.getElementById('memory-board');
+      board.innerHTML = '';
+      memoryFlipped = [];
+      memoryMatched = 0;
+
+      const items = [...memoryIcons, ...memoryIcons].sort(() => Math.random() - 0.5);
+
+      items.forEach((icon, idx) => {
+        const card = document.createElement('div');
+        card.className = 'touch-btn bg-amber-200 hover:bg-amber-300 rounded-2xl h-20 flex items-center justify-center cursor-pointer border-2 border-amber-400 text-2xl shadow-sm transition-all';
+        card.dataset.icon = icon;
+        card.dataset.index = idx;
+        card.onclick = () => flipMemoryCard(card);
+        card.innerHTML = `<i class="fa-solid fa-question text-amber-700"></i>`;
+        board.appendChild(card);
+      });
+    }
+
+    function flipMemoryCard(card) {
+      if (memoryFlipped.length >= 2 || card.classList.contains('matched') || memoryFlipped.includes(card)) return;
+
+      const icon = card.dataset.icon;
+      card.className = 'touch-btn bg-white rounded-2xl h-20 flex items-center justify-center border-2 border-amber-500 text-amber-800 text-2xl shadow-md';
+      card.innerHTML = `<i class="fa-solid ${icon}"></i>`;
+      memoryFlipped.push(card);
+
+      if (memoryFlipped.length === 2) {
+        const [c1, c2] = memoryFlipped;
+        if (c1.dataset.icon === c2.dataset.icon) {
+          c1.classList.add('matched');
+          c2.classList.add('matched');
+          memoryFlipped = [];
+          memoryMatched += 2;
+          if (memoryMatched === memoryIcons.length * 2) {
+            speakText('¡Muy bien! Has completado el juego de memoria.');
+          }
+        } else {
+          setTimeout(() => {
+            c1.className = 'touch-btn bg-amber-200 rounded-2xl h-20 flex items-center justify-center cursor-pointer border-2 border-amber-400 text-2xl shadow-sm';
+            c1.innerHTML = `<i class="fa-solid fa-question text-amber-700"></i>`;
+            c2.className = 'touch-btn bg-amber-200 rounded-2xl h-20 flex items-center justify-center cursor-pointer border-2 border-amber-400 text-2xl shadow-sm';
+            c2.innerHTML = `<i class="fa-solid fa-question text-amber-700"></i>`;
+            memoryFlipped = [];
+          }, 1000);
+        }
+      }
+    }
+
+    /* --- LÓGICA RASTREO VISUAL --- */
+    let rastreoTimer = null;
+    let rastreoTimeLeft = 30;
+    let rastreoHits = 0;
+
+    function iniciarRastreo() {
+      document.getElementById('rastreo-overlay').classList.add('hidden');
+      document.getElementById('target-rastreo').classList.remove('hidden');
+
+      rastreoHits = 0;
+      rastreoTimeLeft = 30;
+      document.getElementById('rastreo-score').innerText = rastreoHits;
+      document.getElementById('rastreo-timer').innerText = `${rastreoTimeLeft}s`;
+
+      positionRastreoTarget();
+
+      if (rastreoTimer) clearInterval(rastreoTimer);
+
+      rastreoTimer = setInterval(() => {
+        rastreoTimeLeft--;
+        document.getElementById('rastreo-timer').innerText = `${rastreoTimeLeft}s`;
+
+        if (rastreoTimeLeft <= 0) {
+          clearInterval(rastreoTimer);
+          document.getElementById('target-rastreo').classList.add('hidden');
+          document.getElementById('rastreo-overlay').classList.remove('hidden');
+          speakText(`Tiempo completado. Lograste ${rastreoHits} aciertos.`);
+        } else if (rastreoTimeLeft % 3 === 0) {
+          positionRastreoTarget();
+        }
+      }, 1000);
+    }
+
+    function positionRastreoTarget() {
+      const board = document.getElementById('game-board-rastreo');
+      const target = document.getElementById('target-rastreo');
+
+      const width = board.clientWidth;
+      const height = board.clientHeight;
+
+      const isLeft = Math.random() < 0.8;
+      const x = isLeft ? (Math.random() * (width * 0.4) + (width * 0.05)) : (Math.random() * (width * 0.4) + (width * 0.55));
+      const y = Math.random() * (height * 0.6) + (height * 0.2);
+
+      target.style.left = `${x}px`;
+      target.style.top = `${y}px`;
+    }
+
+    function hitRastreo() {
+      rastreoHits++;
+      document.getElementById('rastreo-score').innerText = rastreoHits;
+      positionRastreoTarget();
+    }
+  </script>
+</body>
+</html>
